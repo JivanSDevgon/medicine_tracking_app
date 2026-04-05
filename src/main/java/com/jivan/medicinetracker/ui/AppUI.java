@@ -1,5 +1,7 @@
 package com.jivan.medicinetracker.ui;
 
+import com.jivan.medicinetracker.database.MedicineDatabase;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,6 +9,10 @@ public class AppUI extends JFrame {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
+
+    private HomeScreen homeScreen;
+    private MedicineEditorScreen medicineEditorScreen;
+    private MedicineManagerScreen medicineManagerScreen;
 
     public AppUI() {
         setTitle("Medicine Tracker");
@@ -19,17 +25,22 @@ public class AppUI extends JFrame {
         mainPanel = new JPanel(cardLayout);
 
         // Screens
-        HomeScreen homeScreen = new HomeScreen(this);
-        MedicineManagerScreen medicineManagerScreen = new MedicineManagerScreen(this);
+        homeScreen = new HomeScreen(this);
+        medicineEditorScreen = new MedicineEditorScreen(this);
+        medicineManagerScreen = new MedicineManagerScreen(this, medicineEditorScreen);
 
         mainPanel.add(homeScreen, "HOME");
         mainPanel.add(medicineManagerScreen, "MANAGE");
+        mainPanel.add(medicineEditorScreen, "EDITOR");
 
         add(mainPanel);
     }
 
     // Method to switch screens
     public void showScreen(String name) {
+        if (name.equals("MANAGE")) {
+            medicineManagerScreen.loadMedicines();
+        }
         cardLayout.show(mainPanel, name);
     }
 
