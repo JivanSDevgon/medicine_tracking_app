@@ -31,13 +31,6 @@ public class MedicineManagerScreen extends JPanel {
         this.medicineEditor = medicineEditor;
         setLayout(new BorderLayout());
 
-//        // setup
-//        setTitle("Medicine Tracker App");
-//        setSize(500, 400);
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setLocationRelativeTo(null); // center on screen
-//        setLayout(new BorderLayout(10, 10));
-
         // title
         titleLabel = new JLabel("Manage Medicines", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
@@ -96,7 +89,7 @@ public class MedicineManagerScreen extends JPanel {
             ));
 
             JLabel label = new JLabel(
-                    m.id + " | " + m.name + " | " + m.dosage + " | " + m.form + " | " + m.notes
+                    "ID: " + m.id + " | " + m.name + " | Dose: " + m.dosage + " | " + m.form + " | Units: " + m.units + " | Packets: " + m.packet + " | Boxes: " + m.box + " | " + m.notes
             );
 
             row.add(label, BorderLayout.CENTER);

@@ -11,17 +11,11 @@ public class HomeScreen extends JPanel {
     private JPanel upcomingMedicinePanel;
     private JPanel buttonPanel;
     private JButton manageMedicineButton;
+    private JButton inventoryButton;
 
     public HomeScreen(AppUI parent) {
         this.parent = parent;
         setLayout(new BorderLayout());
-
-//        // setup
-//        setTitle("Medicine Tracker App");
-//        setSize(500, 400);
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setLocationRelativeTo(null); // center on screen
-//        setLayout(new BorderLayout(10, 10));
 
         // title
         titleLabel = new JLabel("Medicine Tracker", SwingConstants.CENTER);
@@ -36,12 +30,13 @@ public class HomeScreen extends JPanel {
 
         // button panel
         buttonPanel = new JPanel();
-        manageMedicineButton = new JButton("Manage Medicine");
+        manageMedicineButton = new JButton("Manage Medicines");
         manageMedicineButton.addActionListener((ActionEvent e) -> parent.showScreen("MANAGE"));
         buttonPanel.add(manageMedicineButton);
+
+        inventoryButton = new JButton("Inventory");
+        inventoryButton.addActionListener((ActionEvent e) -> parent.showScreen("INVENTORY"));
+        buttonPanel.add(inventoryButton);
         add(buttonPanel, BorderLayout.SOUTH);
-    }
-    public void showScreen() {
-        setVisible(true);
     }
 }

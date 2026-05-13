@@ -4,9 +4,9 @@ public class LogModel {
     public int id;
     public int medicineId;
     public long timestamp;
-    public String amount;
+    public int amount;
 
-    public LogModel(int medicineId, long timestamp, String amount) {
+    public LogModel(int medicineId, long timestamp, int amount) {
         this.medicineId = medicineId;
         this.timestamp = timestamp;
         this.amount = amount;

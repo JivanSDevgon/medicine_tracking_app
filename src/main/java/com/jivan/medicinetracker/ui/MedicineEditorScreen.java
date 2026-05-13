@@ -14,8 +14,10 @@ public class MedicineEditorScreen extends JPanel {
     private JTextField nameField;
     private JTextField dosageField;
     private JTextField formField;
+    private JTextField unitsField;
+    private JTextField packetField;
+    private JTextField boxField;
     private JTextArea notesField;
-    private JTextField stockField;
     private boolean isEditMode = false;
 
     private JLabel titleLabel;
@@ -28,13 +30,6 @@ public class MedicineEditorScreen extends JPanel {
         this.parent = parent;
         setLayout(new BorderLayout());
 
-//        // setup
-//        setTitle("Medicine Tracker App");
-//        setSize(500, 400);
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setLocationRelativeTo(null); // center on screen
-//        setLayout(new BorderLayout(10, 10));
-
         // title
         titleLabel = new JLabel("Edit Medicine", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
@@ -44,8 +39,10 @@ public class MedicineEditorScreen extends JPanel {
         nameField = new JTextField(20);
         dosageField = new JTextField(20);
         formField = new JTextField(20);
+        unitsField = new JTextField(20);
+        packetField = new JTextField(20);
+        boxField = new JTextField(20);
         notesField = new JTextArea(4, 20);
-        stockField = new JTextField(20);
 
         // panel for input fields
         medicinePanel = new JPanel();
@@ -63,11 +60,18 @@ public class MedicineEditorScreen extends JPanel {
         gbc.gridx = 0; gbc.gridy = 2; medicinePanel.add(new JLabel("Form:"), gbc);
         gbc.gridx = 1; medicinePanel.add(formField, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 3; medicinePanel.add(new JLabel("Notes:"), gbc);
+        gbc.gridx = 0; gbc.gridy = 3; medicinePanel.add(new JLabel("Units:"), gbc);
+        gbc.gridx = 1; medicinePanel.add(unitsField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 4; medicinePanel.add(new JLabel("Packet:"), gbc);
+        gbc.gridx = 1; medicinePanel.add(packetField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 5; medicinePanel.add(new JLabel("Box:"), gbc);
+        gbc.gridx = 1; medicinePanel.add(boxField, gbc);
+
+        gbc.gridx = 0; gbc.gridy = 6; medicinePanel.add(new JLabel("Notes:"), gbc);
         gbc.gridx = 1; medicinePanel.add(new JScrollPane(notesField), gbc);
 
-        gbc.gridx = 0; gbc.gridy = 4; medicinePanel.add(new JLabel("Stock:"), gbc);
-        gbc.gridx = 1; medicinePanel.add(new JScrollPane(stockField), gbc);
 
         add(medicinePanel, BorderLayout.CENTER);
 
@@ -90,10 +94,12 @@ public class MedicineEditorScreen extends JPanel {
         this.isEditMode = true;
 
         nameField.setText(m.name);
-        dosageField.setText(m.dosage);
+        dosageField.setText(String.valueOf(m.dosage));
         formField.setText(m.form);
+        unitsField.setText(String.valueOf(m.units));
+        packetField.setText(String.valueOf(m.packet));
+        boxField.setText(String.valueOf(m.box));
         notesField.setText(m.notes);
-        stockField.setText(String.valueOf(m.stock));
     }
 
     public void setNewMedicine() {
@@ -101,10 +107,12 @@ public class MedicineEditorScreen extends JPanel {
         this.isEditMode = false;
 
         nameField.setText("");
-        dosageField.setText("");
+        dosageField.setText(String.valueOf(""));
         formField.setText("");
+        unitsField.setText(String.valueOf(""));
+        packetField.setText(String.valueOf(""));
+        boxField.setText(String.valueOf(""));
         notesField.setText("");
-        stockField.setText(String.valueOf(""));
     }
 
     public void handleCancel() {
@@ -113,10 +121,12 @@ public class MedicineEditorScreen extends JPanel {
 
     public void handleSave() {
         currentMedicine.name = nameField.getText();
-        currentMedicine.dosage = dosageField.getText();
+        currentMedicine.dosage = Integer.parseInt(dosageField.getText());
         currentMedicine.form = formField.getText();
+        currentMedicine.units = Integer.parseInt(unitsField.getText());
+        currentMedicine.packet = Integer.parseInt(packetField.getText());
+        currentMedicine.box = Integer.parseInt(boxField.getText());
         currentMedicine.notes = notesField.getText();
-        currentMedicine.stock = Integer.parseInt(stockField.getText());
 
         if (isEditMode) {
             MedicineDatabase.editMedicine(currentMedicine);
